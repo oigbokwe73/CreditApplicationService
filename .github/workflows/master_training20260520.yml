@@ -34,6 +34,7 @@ jobs:
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
           dotnet build --configuration Release --output ./output
+          cp host.json ./output/host.json
           popd
       
       - name: Login to Azure
@@ -42,6 +43,7 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_450F7BD60C4B48E98F0F49F4905193BB }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_67962C2757514B9798B2454F70B712B6 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_11ECAF26605E41F7B83109B0E2DBBD0B }}
+          
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
